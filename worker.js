@@ -69,6 +69,27 @@ export default {
         // Fallback to index.html for SPA routing
         return env.ASSETS.fetch('/index.html');
       }
+      
+      // Special handling for script.js to inject environment variables
+      if (path === '/script.js') {
+        let scriptContent = await response.text();
+        
+        // Inject environment variables into the script
+        const apiKey = env.YOUTUBE_API_KEY || 'your_youtube_api_key_here';
+        const channelId = env.YOUTUBE_CHANNEL_ID || 'your_channel_id_here';
+        
+        // Replace any placeholders in the script
+        scriptContent = scriptContent.replace(/{{YOUTUBE_API_KEY}}/g, apiKey);
+        scriptContent = scriptContent.replace(/{{YOUTUBE_CHANNEL_ID}}/g, channelId);
+        
+        return new Response(scriptContent, {
+          headers: {
+            'Content-Type': 'application/javascript',
+            'Cache-Control': 'no-cache'
+          }
+        });
+      }
+      
       return response;
     } catch (error) {
       // Fallback to index.html
