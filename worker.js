@@ -24,10 +24,12 @@ export default {
         // Inject environment variables
         const apiKey = env.YOUTUBE_API_KEY || 'your_youtube_api_key_here';
         const channelId = env.YOUTUBE_CHANNEL_ID || 'your_channel_id_here';
+        const sectionTitle = env.SECTION_TITLE || 'Featured Videos';
         
         // Replace all instances of the placeholders
         html = html.replace(/{{YOUTUBE_API_KEY}}/g, apiKey);
         html = html.replace(/{{YOUTUBE_CHANNEL_ID}}/g, channelId);
+        html = html.replace(/{{SECTION_TITLE}}/g, sectionTitle);
         
         // Return modified HTML
         return new Response(html, {
