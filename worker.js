@@ -11,6 +11,14 @@ export default {
         const response = await env.ASSETS.fetch('/index.html');
         let html = await response.text();
         
+        // Debug: Log environment variable status
+        console.log('🔍 Worker Debug:', {
+          hasApiKey: !!env.YOUTUBE_API_KEY,
+          hasChannelId: !!env.YOUTUBE_CHANNEL_ID,
+          apiKeyLength: env.YOUTUBE_API_KEY?.length || 0,
+          channelIdLength: env.YOUTUBE_CHANNEL_ID?.length || 0
+        });
+        
         // Inject environment variables
         const apiKey = env.YOUTUBE_API_KEY || 'your_youtube_api_key_here';
         const channelId = env.YOUTUBE_CHANNEL_ID || 'your_channel_id_here';
@@ -27,8 +35,30 @@ export default {
           }
         });
       } catch (error) {
-        // Fallback to original index.html
-        return env.ASSETS.fetch('/index.html');
+        // Log the error and still try to inject variables
+        console.error('❌ Worker error:', error);
+        
+        // Try to get the file content again and inject what we can
+        try {
+          const response = await env.ASSETS.fetch('/index.html');
+          let html = await response.text();
+          
+          const apiKey = env.YOUTUBE_API_KEY || 'your_youtube_api_key_here';
+          const channelId = env.YOUTUBE_CHANNEL_ID || 'your_channel_id_here';
+          
+          html = html.replace(/{{YOUTUBE_API_KEY}}/g, apiKey);
+          html = html.replace(/{{YOUTUBE_CHANNEL_ID}}/g, channelId);
+          
+          return new Response(html, {
+            headers: {
+              'Content-Type': 'text/html',
+              'Cache-Control': 'no-cache'
+            }
+          });
+        } catch (fallbackError) {
+          console.error('❌ Fallback also failed:', fallbackError);
+          return env.ASSETS.fetch('/index.html');
+        }
       }
     }
     
