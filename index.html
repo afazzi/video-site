@@ -68,7 +68,20 @@
             YOUTUBE_CHANNEL_ID: '{{YOUTUBE_CHANNEL_ID}}'
         };
         
-
+        // Debug: Display environment variables on the page
+        document.addEventListener('DOMContentLoaded', function() {
+            const debugDiv = document.createElement('div');
+            debugDiv.style.cssText = 'position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 12px; z-index: 9999; max-width: 300px;';
+            debugDiv.innerHTML = `
+                <h4 style="margin: 0 0 10px 0; color: #007bff;">🔍 Environment Debug</h4>
+                <div><strong>API Key:</strong> ${window.APP_CONFIG.YOUTUBE_API_KEY ? window.APP_CONFIG.YOUTUBE_API_KEY.substring(0, 20) + '...' : 'NOT SET'}</div>
+                <div><strong>Channel ID:</strong> ${window.APP_CONFIG.YOUTUBE_CHANNEL_ID || 'NOT SET'}</div>
+                <div><strong>API Key Length:</strong> ${window.APP_CONFIG.YOUTUBE_API_KEY ? window.APP_CONFIG.YOUTUBE_API_KEY.length : 0}</div>
+                <div><strong>Is Placeholder:</strong> ${window.APP_CONFIG.YOUTUBE_API_KEY === 'your_youtube_api_key_here' ? 'YES' : 'NO'}</div>
+                <button onclick="this.parentElement.remove()" style="margin-top: 10px; padding: 5px 10px; background: #dc3545; border: none; color: white; border-radius: 4px; cursor: pointer;">Close</button>
+            `;
+            document.body.appendChild(debugDiv);
+        });
     </script>
     
     <script src="script.js"></script>
