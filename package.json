@@ -1,0 +1,14 @@
+{
+  "name": "videohub",
+  "version": "1.0.0",
+  "description": "A modern video website featuring YouTube playlist integration",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy"
+  },
+  "keywords": ["video", "youtube", "playlist", "static-site"],
+  "author": "Your Name",
+  "license": "MIT",
+
+}

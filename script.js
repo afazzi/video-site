@@ -1,4 +1,4 @@
-// Configuration - Load from config.js
+// Configuration - Load from HTML script tag
 const YOUTUBE_API_KEY = window.APP_CONFIG?.YOUTUBE_API_KEY || '';
 const YOUTUBE_CHANNEL_ID = window.APP_CONFIG?.YOUTUBE_CHANNEL_ID || '';
 const MAX_PLAYLIST_ITEMS = 20;
@@ -613,21 +613,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Check if configuration is loaded
     if (!window.APP_CONFIG) {
-        console.error('❌ Configuration not loaded. Make sure config.js is loaded before script.js');
-        showPlaylistError('Configuration not loaded. Please check that config.js is properly included.');
+        console.error('❌ Configuration not loaded. Make sure environment variables are properly set in Cloudflare Workers');
+        showPlaylistError('Configuration not loaded. Please check that environment variables are properly set.');
         return;
     }
     
     // Check if API keys are configured
     if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'your_youtube_api_key_here') {
         console.error('❌ YouTube API key not configured');
-        showPlaylistError('YouTube API key not configured. Please edit config.js with your API key.');
+        showPlaylistError('YouTube API key not configured. Please set YOUTUBE_API_KEY environment variable in Cloudflare Workers.');
         return;
     }
     
     if (!YOUTUBE_CHANNEL_ID || YOUTUBE_CHANNEL_ID === 'your_channel_id_here') {
         console.error('❌ YouTube Channel ID not configured');
-        showPlaylistError('YouTube Channel ID not configured. Please edit config.js with your channel ID.');
+        showPlaylistError('YouTube Channel ID not configured. Please set YOUTUBE_CHANNEL_ID environment variable in Cloudflare Workers.');
         return;
     }
     

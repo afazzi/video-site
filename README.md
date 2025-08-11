@@ -59,7 +59,7 @@ A beautiful, responsive video website featuring a hero video section and an inte
 Since GitHub Pages doesn't support environment variables, you have two options:
 
 **Option 1: Manual Configuration (⚠️ NOT RECOMMENDED for public repos)**
-1. Edit `config.js` and replace the placeholder values with your actual API keys
+1. Set environment variables in Cloudflare Workers dashboard or use `wrangler secret put` command
 2. **⚠️ WARNING**: This exposes your API keys in the code (not recommended for public repos)
 3. **Consider making your repository private** if you must use this method
 
@@ -94,9 +94,8 @@ video-site/
 ├── index.html          # Main HTML file
 ├── styles.css          # CSS styles and animations
 ├── script.js           # JavaScript functionality
-├── config.js           # Configuration template (⚠️ Don't commit with real keys!)
-├── env.example         # Example environment variables
-├── .gitignore          # Git ignore rules (includes config.js)
+
+├── .gitignore          # Git ignore rules
 └── README.md           # This file
 ```
 

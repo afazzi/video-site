@@ -5,21 +5,19 @@
 Before uploading your VideoHub project to GitHub, ensure you've completed ALL of the following security measures:
 
 ### 1. API Key Security
-- [ ] **No real API keys in config.js** - Only placeholder values like `'your_youtube_api_key_here'`
+- [ ] **No real API keys in code** - Only placeholder values like `'your_youtube_api_key_here'`
 - [ ] **No real API keys in any .js files** - Check all JavaScript files
 - [ ] **No real API keys in HTML files** - Check for hardcoded keys
 - [ ] **No real API keys in comments** - Remove any accidentally committed keys
 
 ### 2. Configuration Files
-- [ ] **config.js contains only placeholders** - No actual API keys
+- [ ] **Environment variables are properly set** - No actual API keys in source code
 - [ ] **.env file is NOT committed** - Check .gitignore includes it
-- [ ] **.env.example exists** - Template file for users to copy
 - [ ] **No secrets.js or api-keys.js** - Remove any additional key files
 
 ### 3. Git Configuration
-- [ ] **config.js is in .gitignore** - Prevents accidental commits
 - [ ] **All environment files ignored** - .env, .env.local, etc.
-- [ **No sensitive files tracked** - Check git status
+- [ ] **No sensitive files tracked** - Check git status
 
 ### 4. Code Review
 - [ ] **No hardcoded credentials** - Search for passwords, tokens, keys
