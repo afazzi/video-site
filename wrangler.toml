@@ -4,8 +4,3 @@ main = "worker.js"
 
 [assets]
 directory = "."
-
-# Environment variables (these are placeholders for local development)
-[vars]
-YOUTUBE_API_KEY = "your_youtube_api_key_here"
-YOUTUBE_CHANNEL_ID = "your_channel_id_here"
