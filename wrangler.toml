@@ -1,4 +1,4 @@
-name = "videohub"
+name = "video-site"
 compatibility_date = "2024-08-11"
 main = "worker.js"
 
