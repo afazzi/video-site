@@ -374,12 +374,8 @@ function showErrorInGrid(message) {
 // Fetch user's playlists
 async function fetchUserPlaylists() {
     try {
-        console.log('🔍 Fetching playlists for channel:', YOUTUBE_CHANNEL_ID);
-        
         // Fetch all playlists for the channel directly
         const playlistsResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&maxResults=50&key=${YOUTUBE_API_KEY}`);
-        
-        console.log('📡 Playlists API response status:', playlistsResponse.status);
         
         if (!playlistsResponse.ok) {
             const errorText = await playlistsResponse.text();
@@ -397,14 +393,10 @@ async function fetchUserPlaylists() {
         }
         
         const playlistsData = await playlistsResponse.json();
-        console.log('📊 Playlists API response:', playlistsData);
         
         if (!playlistsData.items || playlistsData.items.length === 0) {
-            console.warn('⚠️ No playlists found in API response');
             throw new Error('No playlists found for this channel');
         }
-        
-        console.log(`✅ Found ${playlistsData.items.length} playlists`);
         
         userPlaylists = playlistsData.items.map(playlist => ({
             id: playlist.id,
@@ -444,7 +436,6 @@ function showPlaylistError(errorMessage) {
 
 // Retry playlist fetch
 async function retryPlaylistFetch() {
-    console.log('🔄 Retrying playlist fetch...');
     const playlists = await fetchUserPlaylists();
     createPlaylistButtons(playlists);
 }
@@ -524,8 +515,6 @@ function initializePlaylistScrolling() {
 // Test API key validity
 async function testAPIKey() {
     try {
-        console.log('🧪 Testing API key validity...');
-        
         // Test with a simple search query
         const testResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=test&maxResults=1&key=${YOUTUBE_API_KEY}`);
         
@@ -536,7 +525,6 @@ async function testAPIKey() {
         }
         
         const testData = await testResponse.json();
-        console.log('✅ API key test successful:', testData);
         return true;
         
     } catch (error) {
@@ -609,8 +597,6 @@ function createPlaylistButtons(playlists) {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🚀 Initializing VideoHub application...');
-    
     // Check if configuration is loaded
     if (!window.APP_CONFIG) {
         console.error('❌ Configuration not loaded. Make sure environment variables are properly set in Cloudflare Workers');
@@ -631,9 +617,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
     
-    console.log('🔑 API Key:', YOUTUBE_API_KEY.substring(0, 10) + '...');
-    console.log('📺 Channel ID:', YOUTUBE_CHANNEL_ID);
-    
     try {
         // First, test API key validity
         const apiKeyValid = await testAPIKey();
@@ -642,8 +625,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             showPlaylistError('YouTube API key is invalid or expired. Please check your API key configuration.');
             return;
         }
-        
-        console.log('✅ API key validation successful');
         
         // Fetch user's playlists
         const playlists = await fetchUserPlaylists();
