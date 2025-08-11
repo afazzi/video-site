@@ -60,6 +60,15 @@
         </footer>
     </div>
 
+    <!-- Load environment variables from Cloudflare Workers -->
+    <script>
+        // This script will be replaced by Cloudflare Workers with actual environment variables
+        window.APP_CONFIG = {
+            YOUTUBE_API_KEY: '{{YOUTUBE_API_KEY}}',
+            YOUTUBE_CHANNEL_ID: '{{YOUTUBE_CHANNEL_ID}}'
+        };
+    </script>
+    
     <script src="config.js"></script>
     <script src="script.js"></script>
 </body>

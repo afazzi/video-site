@@ -1,5 +1,6 @@
 name = "videohub"
 compatibility_date = "2024-08-11"
+main = "src/index.js"
 
 [assets]
 directory = "."

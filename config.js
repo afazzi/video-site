@@ -1,18 +1,26 @@
 // Configuration file for API keys and settings
 // ⚠️ SECURITY WARNING: Never commit this file with real API keys!
 
-// Function to load environment variables
+// Function to load environment variables from Cloudflare Workers
 function loadConfig() {
-    // Try to load from environment variables (for production)
-    if (typeof process !== 'undefined' && process.env) {
+    // For Cloudflare Workers environment
+    if (typeof globalThis !== 'undefined' && globalThis.YOUTUBE_API_KEY) {
         return {
-            YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
-            YOUTUBE_CHANNEL_ID: process.env.YOUTUBE_CHANNEL_ID
+            YOUTUBE_API_KEY: globalThis.YOUTUBE_API_KEY,
+            YOUTUBE_CHANNEL_ID: globalThis.YOUTUBE_CHANNEL_ID
         };
     }
     
-    // For browser environment, try to load from .env file or use defaults
-    // You can also manually set these values here for development
+    // For browser environment, try to load from environment variables
+    // This will work when deployed to Cloudflare Workers
+    if (typeof YOUTUBE_API_KEY !== 'undefined' && YOUTUBE_API_KEY !== 'your_youtube_api_key_here') {
+        return {
+            YOUTUBE_API_KEY: YOUTUBE_API_KEY,
+            YOUTUBE_CHANNEL_ID: YOUTUBE_CHANNEL_ID
+        };
+    }
+    
+    // Fallback to placeholder values for development
     return {
         // ⚠️ IMPORTANT: Replace these with your actual API keys!
         // Get your YouTube API key from: https://console.developers.google.com/
