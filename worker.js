@@ -4,6 +4,11 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
     
+    // Debug: Log environment variables
+    console.log('🔍 Worker environment variables:');
+    console.log('🔑 YOUTUBE_API_KEY:', env.YOUTUBE_API_KEY ? 'SET' : 'NOT SET');
+    console.log('📺 YOUTUBE_CHANNEL_ID:', env.YOUTUBE_CHANNEL_ID ? 'SET' : 'NOT SET');
+    
     // Handle root path and inject environment variables
     if (path === '/' || path === '/index.html') {
       try {
@@ -12,8 +17,13 @@ export default {
         let html = await response.text();
         
         // Inject environment variables
-        html = html.replace('{{YOUTUBE_API_KEY}}', env.YOUTUBE_API_KEY || 'your_youtube_api_key_here');
-        html = html.replace('{{YOUTUBE_CHANNEL_ID}}', env.YOUTUBE_CHANNEL_ID || 'your_channel_id_here');
+        const apiKey = env.YOUTUBE_API_KEY || 'your_youtube_api_key_here';
+        const channelId = env.YOUTUBE_CHANNEL_ID || 'your_channel_id_here';
+        
+        console.log('🔍 Injecting variables:', { apiKey: apiKey.substring(0, 10) + '...', channelId });
+        
+        html = html.replace('{{YOUTUBE_API_KEY}}', apiKey);
+        html = html.replace('{{YOUTUBE_CHANNEL_ID}}', channelId);
         
         // Return modified HTML
         return new Response(html, {
@@ -23,6 +33,7 @@ export default {
           }
         });
       } catch (error) {
+        console.error('❌ Error in Worker:', error);
         // Fallback to original index.html
         return env.ASSETS.fetch('/index.html');
       }
@@ -37,6 +48,7 @@ export default {
       }
       return response;
     } catch (error) {
+      console.error('❌ Error serving static file:', error);
       // Fallback to index.html
       return env.ASSETS.fetch('/index.html');
     }
