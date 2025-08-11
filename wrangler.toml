@@ -1,0 +1,11 @@
+name = "videohub"
+compatibility_date = "2024-08-11"
+
+[assets]
+directory = "."
+
+[env.production]
+name = "videohub-production"
+
+[env.staging]
+name = "videohub-staging"
