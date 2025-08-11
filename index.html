@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">VideoHub</h1>
+                <nav class="nav">
+                    <a href="https://www.twitch.tv/afazzi" class="nav-link" target="_blank">Twitch</a>
+                    <a href="https://www.youtube.com/@afazzi" class="nav-link" target="_blank">YouTube</a>
+                    <a href="#" class="nav-link">About</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Hero Section -->
+            <section class="hero" id="hero">
+                <div class="hero-content">
+                    <h2 class="hero-title" id="hero-title">Neverending Backlog</h2>
+                    <p class="hero-subtitle" id="hero-subtitle">There are so many games, so little time.</p>
+                    <a href="#" class="watch-now-btn" id="watch-now-btn">Watch Now</a>
+                </div>
+            </section>
+
+            <!-- Playlist Selection -->
+            <section class="playlist-selection">
+                <div class="container">
+                    <div class="playlist-buttons">
+                        <!-- Playlist buttons will be created dynamically by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Grid -->
+            <section class="videos">
+                <div class="container">
+                    <h3 class="section-title">Featured Videos</h3>
+                    <div class="video-grid" id="videoGrid">
+                        <!-- Videos will be loaded here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 VideoHub. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
