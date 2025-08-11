@@ -8,3 +8,11 @@ binding = "ASSETS"
 
 # Environment variables will be set in the Cloudflare Workers dashboard
 # Use [secrets] section for sensitive data like API keys
+
+[log_filters]
+# Log all requests and responses
+"*" = "debug"
+
+# Log specific worker events
+"worker" = "info"
+"fetch" = "debug"
